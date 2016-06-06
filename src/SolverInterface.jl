@@ -3,7 +3,7 @@
 
 import MathProgBase.SolverInterface: AbstractMathProgSolver, AbstractMathProgModel,
   getsense, numvar, numconstr, getobjval, getobjbound, getsolution, getsolvetime,
-  setwarmstart!, loadnonlinearproblem!, optimize!, AbstractNLPEvaluator, status,
+  setwarmstart!, loadproblem!, optimize!, AbstractNLPEvaluator, status,
   obj_expr
 
 ## Solver Objects
@@ -39,7 +39,7 @@ function DRealMathProgModel(precision::Float64)
   DRealMathProgModel(ctx)
 end
 
-MathProgBase.SolverInterface.model(s::DRealSolver) = DRealMathProgModel(s.precision)
+MathProgBase.SolverInterface.NonlinearModel(s::DRealSolver) = DRealMathProgModel(s.precision)
 
 ## Interface Implementation
 ## ========================
@@ -70,15 +70,15 @@ end
 function setwarmstart!(m::AbstractMathProgModel, v) end
 
 # @doc "Loads the nonlinear programming problem into the model `m`." ->
-function loadnonlinearproblem!(m::DRealMathProgModel,
-                               numVar::Integer,
-                               numConstr::Integer,
-                               x_l::Vector{Float64},      # variable lower bounds
-                               x_u::Vector{Float64},      # variable upper bounds
-                               g_lb,     # constraint lower bounds
-                               g_ub,     # constraint upper bounds
-                               sense::Symbol, # :Max or :Min
-                               d::AbstractNLPEvaluator)
+function loadproblem!(m::DRealMathProgModel,
+                      numVar::Integer,
+                      numConstr::Integer,
+                      x_l::Vector{Float64},      # variable lower bounds
+                      x_u::Vector{Float64},      # variable upper bounds
+                      g_lb,     # constraint lower bounds
+                      g_ub,     # constraint upper bounds
+                      sense::Symbol, # :Max or :Min
+                      d::AbstractNLPEvaluator)
 
   (sense == :Min || sense == :Max) || error("Unrecognized sense $sense")
   @assert length(x_l) == length(x_u) == numVar
@@ -87,7 +87,7 @@ function loadnonlinearproblem!(m::DRealMathProgModel,
   @show x_l
   @show x_u
   vars = [Var(m.ctx, Float64, x_l[i], x_u[i]) for i = 1:numVar]
-  
+
   m.vars = vars
   @show obj_expr(d)
   # push_ctx!(m.ctx)
