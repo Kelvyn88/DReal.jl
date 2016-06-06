@@ -139,9 +139,9 @@ for (op,opensmt_func) in @compat Dict(:(&) => opensmt_mk_and, :(|) => opensmt_mk
 end
 
 # Implication
-implies{T1<:Union(Bool, Ex{Bool}), T2<:Union(Bool, Ex{Bool})}(ctx::Context, x::T1, y::T2) =
+implies{T1<:Union{Bool, Ex{Bool}}, T2<:Union{Bool, Ex{Bool}}}(ctx::Context, x::T1, y::T2) =
   (|)(ctx, (!)(ctx,x), y)
-implies{T1<:Union(Bool, Ex{Bool}), T2<:Union(Bool, Ex{Bool})}(x::T1, y::T2) =
+implies{T1<:Union{Bool, Ex{Bool}}, T2<:Union{Bool, Ex{Bool}}}(x::T1, y::T2) =
   implies(global_context(),x,y)
 → = implies
 
