@@ -105,8 +105,8 @@ println( "res = $(res == -1 ? "unsat" : "sat")")
 print( "\nAsserting ")
 opensmt_print_expr( leq3 )
 print( "\n" )
-opensmt_assert( ctx, leq3 )
 opensmt_push( ctx )
+opensmt_assert( ctx, leq3 )
 
 # Checking for consistency - it is UNSAT
 print( "\nChecking for consistency: " )

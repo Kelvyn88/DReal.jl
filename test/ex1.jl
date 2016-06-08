@@ -46,8 +46,8 @@ res = is_satisfiable()
 @test res == true
 
 # Asserting third inequality
-add!(leq3)
 push_ctx!()
+add!(leq3)
 
 # Checking for consistency
 res = is_satisfiable()
