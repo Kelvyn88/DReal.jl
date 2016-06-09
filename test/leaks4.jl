@@ -8,7 +8,7 @@ import DReal: opensmt_mk_geq,opensmt_mk_leq
 
 i = 0;
 ctx = opensmt_mk_context(@compat UInt32(1));
-opensmt_set_precision (ctx, 0.0000001);
+opensmt_set_precision(ctx, 0.0000001);
 x = opensmt_mk_real_var(ctx, "xleaks4" , 0.0, 1.0);
 y = opensmt_mk_real_var(ctx, "yleaks4" , 0.0, 1.0);
 
