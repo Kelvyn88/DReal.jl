@@ -10,4 +10,4 @@ before_install:
   - sudo apt-get install libstdc++6 libpcre3-dev -y
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'Pkg.init(); Pkg.clone(pwd()); Pkg.test("DReal")'
+  - julia -e 'Pkg.init(); Pkg.clone(pwd()); Pkg.build("DReal"); Pkg.test("DReal")'
