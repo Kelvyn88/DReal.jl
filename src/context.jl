@@ -8,10 +8,10 @@ end
 Context(ctx::Ptr{Void}) = Context(ctx,Set{ASCIIString}())
 Context(l::Logic) = Context(opensmt_mk_context(@compat UInt32(l.val)))
 
-add_vars!(ctx::Context, v::Set{ASCIIString}) = push!(ctx.vars,v...)
+add_vars!(ctx::Context, v::Set{ASCIIString}) = union!(ctx.vars,v)
 add_vars!(ctx::Context, v::ASCIIString) = push!(ctx.vars,v)
 
-create_global_ctx!(l::Logic = qf_nra) = 
+create_global_ctx!(l::Logic = qf_nra) =
   (global default_global_context; default_global_context = Context(l))
 global_context() = (global default_global_context; default_global_context)
 
