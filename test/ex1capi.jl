@@ -12,9 +12,6 @@ reset_ctx!()
 print( "Creating context\n" )
 ctx = opensmt_mk_context(@compat UInt32(1))
 
- # Setting verbosity
-opensmt_set_verbosity(ctx, @compat Int32(4))
-
  # Creating boolean variables
 print( "Creating some boolean variables\n" )
 a = opensmt_mk_bool_var( ctx, "a" )

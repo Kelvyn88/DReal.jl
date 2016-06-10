@@ -5,7 +5,7 @@ begin
 # Blank slate
 reset_ctx!()
 
-set_verbosity_level!(4)
+# set_verbosity_level!(4)
 
 # Creating boolean variables
 a = Var(Bool,"a")
