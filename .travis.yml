@@ -4,6 +4,10 @@ notifications:
 julia:
   - 0.4
   - nightly
+before_install:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update -qq -y
+  - sudo apt-get install libstdc++6 libpcre3-dev julia -y
 script:
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
   - julia -e 'Pkg.init(); Pkg.clone(pwd()); Pkg.test("DReal")'
