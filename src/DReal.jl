@@ -13,7 +13,7 @@ using MathProgBase
 #     error("DReal not properly installed. Please run Pkg.build(\"DReal\")")
 # end
 
-deps_dir = joinpath(joinpath(Pkg.dir("DReal"),"deps"))
+deps_dir = joinpath(dirname(dirname(@__FILE__)),"deps")
 prefix = joinpath(deps_dir,"usr")
 src_dir = joinpath(prefix,"src")
 bin_dir = joinpath(prefix,"bin")
