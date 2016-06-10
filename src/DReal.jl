@@ -13,8 +13,6 @@ using MathProgBase
 #     error("DReal not properly installed. Please run Pkg.build(\"DReal\")")
 # end
 
-VERSION < v"0.4-" && using Docile
-
 deps_dir = joinpath(joinpath(Pkg.dir("DReal"),"deps"))
 prefix = joinpath(deps_dir,"usr")
 src_dir = joinpath(prefix,"src")
