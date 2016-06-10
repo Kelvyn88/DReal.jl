@@ -240,6 +240,9 @@ opensmt_mk_exp(ctx::opensmt_context, e::opensmt_expr) =
 opensmt_mk_log(ctx::opensmt_context, e::opensmt_expr) =
   ccall((:opensmt_mk_log, "libdreal"), Ptr{Void}, (Ptr{Void}, Ptr{Void}), ctx, e)
 
+opensmt_mk_sqrt(ctx::opensmt_context, e::opensmt_expr) =
+  ccall((:opensmt_mk_sqrt, "libdreal"), Ptr{Void}, (Ptr{Void}, Ptr{Void}), ctx, e)
+
 opensmt_mk_pow(ctx::opensmt_context, e1::opensmt_expr, e2::opensmt_expr) =
   ccall((:opensmt_mk_pow, "libdreal"), Ptr{Void}, (Ptr{Void}, Ptr{Void}, Ptr{Void}), ctx, e1, e2)
 

@@ -100,7 +100,7 @@ end
 # Unary Real valued functions
 unaryrealop2opensmt = @compat Dict(
   :abs => opensmt_mk_abs, :exp => opensmt_mk_exp, :log => opensmt_mk_log,
-  :sin => opensmt_mk_sin, :cos => opensmt_mk_cos,
+  :sqrt => opensmt_mk_sqrt, :sin => opensmt_mk_sin, :cos => opensmt_mk_cos,
   :tan => opensmt_mk_tan, :asin => opensmt_mk_asin, :acos => opensmt_mk_acos,
   :atan => opensmt_mk_atan, :sinh => opensmt_mk_sinh, :cosh => opensmt_mk_cosh,
   :tanh => opensmt_mk_tanh, :atan2 => opensmt_mk_atan2)
@@ -110,8 +110,6 @@ for (op,opensmt_func) in unaryrealop2opensmt
   @eval ($op){T<:Real}(x::Ex{T}) = ($op)(global_context(),x)
 end
 
-sqrt{T<:Real}(ctx::Context, x::Ex{T}) = (^)(ctx,x,0.5)
-sqrt{T<:Real}(x::Ex{T}) = sqrt(global_context(),x)
 
 ## Logical Functions
 ## =================
