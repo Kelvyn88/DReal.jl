@@ -4,7 +4,7 @@ extension = @osx? "zip" : "tar.gz"
 
 file_name = "dReal-$version-$os_string-shared-libs.$extension"
 file_url = "https://github.com/dreal/dreal3/releases/download/v$version/$file_name"
-deps_dir = joinpath(joinpath(Pkg.dir("DReal"),"deps"))
+deps_dir = dirname(@__FILE__)
 prefix = joinpath(deps_dir,"usr")
 
 
