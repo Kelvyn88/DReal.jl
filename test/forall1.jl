@@ -1,7 +1,7 @@
 using DReal
 
-b = ForallVar(Float64)
-c = ForallVar(Float64)
+b = ForallVar(Float64, -10.0, 10.0)
+c = ForallVar(Float64,  -10.0, 10.0)
 d = Var(Float64,-10.,10.)
 
 f(x,y) = (x + y)*d + 6

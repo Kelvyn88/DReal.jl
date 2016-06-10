@@ -88,7 +88,7 @@ add!(a → b) # \rightarrow - equivalent to implies(a,b)
 a,b =  model(a,b)
 ```
 
-# Universal Quantification with `ForAll`
+<!-- # Universal Quantification with `ForAll`
 
 DReal has experimental support for combinations of universal and existential quantification.  A universally quantified variable is created using `ForallVar` instead of `Var`.  For example, we can use `Forall` to do a synthesize a simple function.  The following example looks for a binary function `f` in a function space (parameterised by a variable `d`) such that for all inputs `x` and `y`, f(x,y) is greater than `5.0`.
 
@@ -104,7 +104,7 @@ f(x,y) = (x + y)*d + 6
 add!(f(b,c) > 5.0)
 @show is_satisfiable()
 @show model(d)
-```
+``` -->
 
 
 # Optimisation
