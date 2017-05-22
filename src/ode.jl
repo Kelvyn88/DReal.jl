@@ -6,7 +6,7 @@ end
 
 "A system of differential equations"
 immutable ODESystem
-  name::ASCIIString
+  name::String
   odes::Vector{ODE}
 end
 

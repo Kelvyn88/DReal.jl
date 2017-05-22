@@ -4,7 +4,7 @@ using AbstractDomains
 using Compat
 using MathProgBase
 
-@windows_only error("Windows not supported")
+@static is_windows() ? error("Windows not supported") : nothing
 
 # @show joinpath(dirname(@__FILE__),"..","deps","deps.jl")
 # if isfile(joinpath(dirname(@__FILE__),"..","deps","deps.jl"))
@@ -20,7 +20,7 @@ bin_dir = joinpath(prefix,"bin")
 lib_dir = joinpath(prefix,"lib")
 
 try
-  @osx? begin
+  @static is_apple() ? begin
     @compat Libdl.dlopen(joinpath(lib_dir, "libdreal.dylib"), Libdl.RTLD_LAZY|Libdl.RTLD_DEEPBIND|Libdl.RTLD_GLOBAL)
   end : begin
     @compat Libdl.dlopen(joinpath(lib_dir, "libprim.so"), Libdl.RTLD_LAZY|Libdl.RTLD_DEEPBIND|Libdl.RTLD_GLOBAL)

@@ -2,14 +2,14 @@
 #     Objects created in one context cannot be used in another one.""" ->
 type Context
   ctx::Ptr{Void}
-  vars::Set{ASCIIString}
+  vars::Set{String}
 end
 
-Context(ctx::Ptr{Void}) = Context(ctx,Set{ASCIIString}())
+Context(ctx::Ptr{Void}) = Context(ctx,Set{String}())
 Context(l::Logic) = Context(opensmt_mk_context(@compat UInt32(l.val)))
 
-add_vars!(ctx::Context, v::Set{ASCIIString}) = union!(ctx.vars,v)
-add_vars!(ctx::Context, v::ASCIIString) = push!(ctx.vars,v)
+add_vars!(ctx::Context, v::Set{String}) = union!(ctx.vars,v)
+add_vars!(ctx::Context, v::String) = push!(ctx.vars,v)
 
 create_global_ctx!(l::Logic = qf_nra) =
   (global default_global_context; default_global_context = Context(l))
@@ -29,7 +29,7 @@ push_ctx!() = push_ctx!(global_context())
 pop_ctx!(ctx::Context) = opensmt_pop(ctx.ctx)
 pop_ctx!() = pop_ctx!(global_context())
 
-reset_ctx!(ctx::Context) = (opensmt_reset(ctx.ctx);ctx.vars = Set{ASCIIString}())
+reset_ctx!(ctx::Context) = (opensmt_reset(ctx.ctx);ctx.vars = Set{String}())
 reset_ctx!() = reset_ctx!(global_context())
 
 delete_ctx!(ctx::Context) = opensmt_del_context(ctx.ctx)

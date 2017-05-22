@@ -35,9 +35,6 @@ opensmt_push(ctx::opensmt_context) =
 opensmt_pop(ctx::opensmt_context) =
   ccall( (:opensmt_pop, "libdreal"), Void, (Ptr{Void},), ctx)
 
-opensmt_pop(ctx::opensmt_context) =
-  ccall( (:opensmt_pop, "libdreal"), Void, (Ptr{Void},), ctx)
-
 opensmt_assert(ctx::opensmt_context, e::opensmt_expr) =
   ccall((:opensmt_assert, "libdreal"), Void,
     (Ptr{Void}, Ptr{Void}), ctx, e)
@@ -96,44 +93,44 @@ opensmt_mk_false(ctx::opensmt_context) =
 opensmt_mk_bool_var(ctx::opensmt_context, varname::Ptr{UInt8}) =
   ccall((:opensmt_mk_bool_var, "libdreal"), Ptr{Void}, (Ptr{Void}, Ptr{UInt8}), ctx, varname)
 
-opensmt_mk_bool_var(ctx,varname::ASCIIString) = opensmt_mk_bool_var(ctx, pointer(varname))
+opensmt_mk_bool_var(ctx,varname::String) = opensmt_mk_bool_var(ctx, pointer(varname))
 
-opensmt_mk_real_var(ctx::opensmt_context, varname::ASCIIString, lb::Float64, ub::Float64) =
+opensmt_mk_real_var(ctx::opensmt_context, varname::String, lb::Float64, ub::Float64) =
   ccall((:opensmt_mk_real_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}, Float64, Float64), ctx, varname, lb, ub)
 
-opensmt_mk_int_var(ctx::opensmt_context, varname::ASCIIString, lb::Int64, ub::Int64) =
+opensmt_mk_int_var(ctx::opensmt_context, varname::String, lb::Int64, ub::Int64) =
   ccall((:opensmt_mk_int_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}, Int64, Int64), ctx, varname, lb, ub)
 
-opensmt_mk_unbounded_int_var(ctx::opensmt_context, varname::ASCIIString) =
+opensmt_mk_unbounded_int_var(ctx::opensmt_context, varname::String) =
   ccall((:opensmt_mk_unbounded_int_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}), ctx, varname)
 
-opensmt_mk_forall_int_var(ctx::opensmt_context, varname::ASCIIString, lb::Int64, ub::Int64) =
+opensmt_mk_forall_int_var(ctx::opensmt_context, varname::String, lb::Int64, ub::Int64) =
   ccall((:opensmt_mk_forall_int_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}, Int64, Int64), ctx, varname, lb, ub)
 
-opensmt_mk_forall_unbounded_int_var(ctx::opensmt_context, varname::ASCIIString) =
+opensmt_mk_forall_unbounded_int_var(ctx::opensmt_context, varname::String) =
   ccall((:opensmt_mk_forall_unbounded_int_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}), ctx, varname)
 
-opensmt_mk_unbounded_real_var(ctx::opensmt_context, varname::ASCIIString) =
+opensmt_mk_unbounded_real_var(ctx::opensmt_context, varname::String) =
   ccall((:opensmt_mk_unbounded_real_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}), ctx, varname)
 
-opensmt_mk_forall_real_var(ctx::opensmt_context, varname::ASCIIString, lb::Float64, ub::Float64) =
+opensmt_mk_forall_real_var(ctx::opensmt_context, varname::String, lb::Float64, ub::Float64) =
   ccall((:opensmt_mk_forall_real_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}, Float64, Float64), ctx, varname, lb, ub)
 
-opensmt_mk_forall_unbounded_real_var(ctx::opensmt_context, varname::ASCIIString) =
+opensmt_mk_forall_unbounded_real_var(ctx::opensmt_context, varname::String) =
   ccall((:opensmt_mk_forall_real_var, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}), ctx, varname)
 
 opensmt_mk_cost_var(ctx::opensmt_context, varname::Ptr{UInt8}) =
   ccall((:opensmt_mk_cost_var, "libdreal"), Ptr{Void}, (Ptr{Void}, Ptr{UInt8}), ctx, varname)
 
-opensmt_mk_cost_var(ctx,varname::ASCIIString) = opensmt_mk_cost_var(ctx, pointer(varname))
+opensmt_mk_cost_var(ctx,varname::String) = opensmt_mk_cost_var(ctx, pointer(varname))
 
 opensmt_mk_or(ctx::opensmt_context, es::Vector{opensmt_expr}, i::Cuint) =
   ccall((:opensmt_mk_or, "libdreal"), Ptr{Void},
@@ -175,7 +172,7 @@ opensmt_mk_num(ctx::opensmt_context, c::Float64) =
   ccall((:opensmt_mk_num, "libdreal"), Ptr{Void},
         (Ptr{Void}, Float64), ctx, c)
 
-opensmt_mk_num_from_string(ctx::opensmt_context, c::ASCIIString) =
+opensmt_mk_num_from_string(ctx::opensmt_context, c::String) =
   ccall((:opensmt_mk_num_from_string, "libdreal"), Ptr{Void},
         (Ptr{Void}, Ptr{UInt8}), ctx, c)
 
@@ -286,7 +283,7 @@ opensmt_mk_min(ctx::opensmt_context, e1::opensmt_expr, e2::opensmt_expr) =
 
 ## ODE
 function opensmt_define_ode(
-  ctx::opensmt_context, varname::ASCIIString,
+  ctx::opensmt_context, varname::String,
   es1::Vector{opensmt_expr}, es2::Vector{opensmt_expr}, n::Cuint)
   ccall((:opensmt_define_ode, "libdreal"),
         Void,
@@ -301,7 +298,7 @@ function opensmt_mk_integral(
   time_u::opensmt_expr,
   vars_0::Vector{opensmt_expr},
   n::Cuint,
-  flowname::ASCIIString)
+  flowname::String)
   ccall((:opensmt_mk_integral, "libdreal"),
         Ptr{Void},
         (Ptr{Void}, Ptr{opensmt_expr}, Ptr{Void}, Ptr{Void}, Ptr{opensmt_expr}, Cuint,
