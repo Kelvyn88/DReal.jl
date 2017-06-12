@@ -1,4 +1,4 @@
-version = "3.16.06.01"
+version = "3.16.08"
 os_string = @static is_apple() ? "darwin" : "linux"
 extension = @static is_apple() ? "darwin" : "tar.gz"
 
