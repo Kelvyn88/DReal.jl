@@ -1,8 +1,8 @@
-typealias opensmt_expr Ptr{Void}
-typealias opensmt_context Ptr{Void}
+opensmt_expr = Ptr{Void}
+opensmt_context = Ptr{Void}
 
 ## Communication APIs
-## =========================
+## ==================
 opensmt_init() = ccall( (:opensmt_init, "libdreal"), Void, ())
 
 opensmt_set_verbosity(ctx::opensmt_context, level::Cint) =
@@ -67,7 +67,7 @@ opensmt_get_bool(ctx::opensmt_context, e::opensmt_expr) =
   ccall((:opensmt_get_bool, "libdreal"), Cint, (Ptr{Void}, Ptr{Void}), ctx, e)
 
 opensmt_prefer(e::opensmt_expr) =
-  ccall((:opensmt_prefer, "libdreal"), Cuint, (Ptr{Void}, Ptr{Void}), e)
+  ccall((:opensmt_prefer, "libdreal"), Cuint, (Ptr{Void},), e)
 
 opensmt_polarity(ctx::opensmt_context, e::opensmt_expr, pos::Cint) =
   ccall((:opensmt_polarity, "libdreal"), Cuint, (Ptr{Void}, Ptr{Void}), ctx, e, pos)

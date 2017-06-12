@@ -6,13 +6,6 @@ using MathProgBase
 
 @static is_windows() ? error("Windows not supported") : nothing
 
-# @show joinpath(dirname(@__FILE__),"..","deps","deps.jl")
-# if isfile(joinpath(dirname(@__FILE__),"..","deps","deps.jl"))
-#     include("../deps/deps.jl")
-# else
-#     error("DReal not properly installed. Please run Pkg.build(\"DReal\")")
-# end
-
 deps_dir = joinpath(dirname(dirname(@__FILE__)),"deps")
 prefix = joinpath(deps_dir,"usr")
 src_dir = joinpath(prefix,"src")
